@@ -4,13 +4,8 @@ import os
 import json 
 import argparse
 
-
-try:
-    from os import getcwdu as getcwd
-except:
-    from os import getcwd as getcwd
-
 from pcbmode.utils.json import dictFromJsonFile
+from nets import upvNetToPCBmodE
     
     
 def argSetup():
@@ -33,7 +28,7 @@ def argSetup():
     return args
 
 
-def process_category(category):
+def process_category(category, data):
     print(category, ' - ', end='')
     
     if category == "component_instances":
@@ -57,7 +52,7 @@ def process_category(category):
     elif category == "named_regions":
         print("Not yet implemented")
     elif category == "nets":
-        print("Not yet implemented")
+        upvNetToPCBmodE(data)
     elif category == "paths":
         print("Not yet implemented")
     elif category == "pcb_text":
@@ -75,7 +70,7 @@ def process_category(category):
     elif category == "trace_segments":
         print("Not yet implemented")
     elif category == "version":
-        print("Not yet implemented")
+        print("Nothing to be done")
     else:
         print("Unknown")
 
@@ -98,8 +93,7 @@ def convert():
     print("Processing categories...")
     print("")
     for category in json_dict:
-        process_category(category)
-    #json.dumps(json_dict)
+        process_category(category, json_dict[category])
 
 
     print("Done!")
