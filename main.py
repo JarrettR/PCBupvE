@@ -9,7 +9,8 @@ from nets import upvNets
 from layout_objects import upvLayoutObjects
 from trace_segments import upvTraceSegments
 
-#Upv JSON spec
+
+#Old Upv JSON spec
 #https://forum.upverter.com/uploads/default/86/5809bf9f391807c1.pdf
     
 def argSetup():
@@ -48,7 +49,7 @@ def process_category(category, data):
     elif category == "layout_body_attributes":
         print("Not yet implemented")
     elif category == "layout_objects":
-        upvLayoutObjects(data)
+        vias = upvLayoutObjects(data)
     elif category == "module_instances":
         print("Not yet implemented")
     elif category == "modules":
@@ -97,6 +98,7 @@ def convert():
 
     json_dict = dictFromJsonFile(input_name)
     
+    #This project built on version 0.3.0
     print("Input file loaded, OpenJSON format version:", json_dict['version']['file_version'])
     
     print("")

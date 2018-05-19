@@ -2,6 +2,8 @@
 
 import json 
 
+from pprint import pprint
+
 def upvLayoutObjects(upv_layout_objects):
     """
     Layout Objects
@@ -30,6 +32,8 @@ def upvLayoutObjects(upv_layout_objects):
     '''
     count = 0
     
+    vias = {}
+    
     for layout_object in upv_layout_objects:
         count += 1
         
@@ -53,18 +57,28 @@ def upvLayoutObjects(upv_layout_objects):
             
         
         location = [ nmToPx(layout_object['x']), nmToPx(layout_object['y']) ]
-        createVia(layout_object['attributes'])
+        footprint = createViaFootprint(layout_object['attributes'])
+        
+        via = {
+            'assembly': { 'refdef': { 'show': False } },
+            'footprint': footprint,
+            'layer': 'bottom', #Todo: put some smarts in here
+            'location': location,
+            'rotate': 0,
+            'silkscreen': { 'refdef': { 'show': False } }
+        }
+        
+        vias[str(count)] = via
        
 
-    vias = {
-        'vias': {str(count): { 'location': location } }
-    }
     
     print(count, "vias processed")
-    return(vias)
+    return({ 'vias': vias })
     
-def createVia(attributes):
+def createViaFootprint(attributes):
     pins = { 'via': 0 }
+    #todo: create footprint
+    return 'via'
     
 def nmToPx(nm):
     #Better use Inkscape 0.92 or later
