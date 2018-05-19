@@ -5,8 +5,11 @@ import json
 import argparse
 
 from pcbmode.utils.json import dictFromJsonFile
-from nets import upvNetToPCBmodE
-    
+from nets import upvNets
+from trace_segments import upvTraceSegments
+
+#Upv JSON spec
+#https://forum.upverter.com/uploads/default/86/5809bf9f391807c1.pdf
     
 def argSetup():
     """
@@ -29,7 +32,7 @@ def argSetup():
 
 
 def process_category(category, data):
-    print(category, ' - ', end='')
+    print(category.ljust(22), ' - ', end='')
     
     if category == "component_instances":
         print("Not yet implemented")
@@ -52,7 +55,7 @@ def process_category(category, data):
     elif category == "named_regions":
         print("Not yet implemented")
     elif category == "nets":
-        upvNetToPCBmodE(data)
+        upvNets(data)
     elif category == "paths":
         print("Not yet implemented")
     elif category == "pcb_text":
@@ -68,7 +71,7 @@ def process_category(category, data):
     elif category == "shapes":
         print("Not yet implemented")
     elif category == "trace_segments":
-        print("Not yet implemented")
+        upvTraceSegments(data)
     elif category == "version":
         print("Nothing to be done")
     else:

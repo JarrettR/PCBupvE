@@ -2,11 +2,9 @@
 
 import json 
 
-from pprint import pprint
-
-def upvNetToPCBmodE(upv_nets):
+def upvNets(upv_nets):
     """
-    I think these might be airwires
+    Schematic nets
     """
     routes = []
     count = 0
