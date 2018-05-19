@@ -71,11 +71,17 @@ def process_category(category, data):
     elif category == "shapes":
         print("Not yet implemented")
     elif category == "trace_segments":
-        upvTraceSegments(data)
+        out = upvTraceSegments(data)
+        saveJSON('routes.json', out)
     elif category == "version":
         print("Nothing to be done")
     else:
         print("Unknown")
+
+def saveJSON(filename, data):
+    with open(filename, 'w') as outfile:
+        json.dump(data, outfile, indent=4, sort_keys=True)
+
 
 def convert():
 
