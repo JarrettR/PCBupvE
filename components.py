@@ -28,14 +28,15 @@ def upvComponents(upv_components):
             used_count += 1
 
             pads, pins = genComponents(upv_components[component]['footprints'][0]['gen_objs'])
-            print(upv_components[component]['name'])
-            print(pads)
+            
+            #todo
             layout = upv_components[component]['footprints'][0]
 
             data = {
                 'pins': pins,
                 'layout': {},
-                'pads': pads
+                'pads': pads,
+                'meta': upv_components[component]['name']
                 }
 
             components[component] = data
@@ -60,7 +61,7 @@ def genComponents(data):
             #todo: flesh out
             drills = {'diameter': nmToPx(pin['attributes']['internal_diameter'])}
         elif pin['attributes']['type'] == 'center cross':
-            pass
+            break
         else:
             raise ValueError("I haven\'t seen pin %s type before! Please report an issue!" % pin['attributes']['type'])
 
@@ -70,8 +71,8 @@ def genComponents(data):
             shapes['height'] = nmToPx(pin['attributes']['height'])
             
         rotate = pin['rotation']
-        x = pin['x']
-        y = pin['y']
+        x = nmToPx(pin['x'])
+        y = nmToPx(pin['y'])
         #todo: attrib-layers, flip
 
         #layer
@@ -103,7 +104,7 @@ def genComponents(data):
         m = hashlib.md5()
         m.update(pickle.dumps(shapes) + pickle.dumps(drills))
         name = m.hexdigest()
-        pads[name] = { 'shapes': shapes, 'drills': drills }
+        pads[name] = { 'shapes': [shapes], 'drills': drills }
         
         pins[len(pins)] = { 'layout': { 'pad': name, 'rotate': rotate, 'location': [x, y] } }
 
@@ -112,4 +113,4 @@ def genComponents(data):
 
 def nmToPx(nm):
     #Better use Inkscape 0.92 or later
-    return (96 * (int(nm) * 0.0000000393701))
+    return (int(nm) / 1000000)
