@@ -5,6 +5,7 @@ import json
 import argparse
 
 from pcbmode.utils.json import dictFromJsonFile
+from components import upvComponents
 from nets import upvNets
 from layout_objects import upvLayoutObjects
 from trace_segments import upvTraceSegments
@@ -39,7 +40,10 @@ def process_category(category, data):
     if category == "component_instances":
         print("Not yet implemented")
     elif category == "components":
-        print("Not yet implemented")
+        components = upvComponents(data)
+        
+        for component in components:
+            saveJSON('outputs/%s.json' % component, components[component])
     elif category == "design_attributes":
         print("Not yet implemented")
     elif category == "layer_options":
