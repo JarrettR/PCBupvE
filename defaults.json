@@ -321,7 +321,7 @@
     }
   },
   "config": {
-    "name": "Shallow",
+    "name": "Default",
     "no-docs": false,
     "no-drill-index": false,
     "no-flashes": false,
