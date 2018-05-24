@@ -5,6 +5,7 @@ import json
 import argparse
 
 from pcbmode.utils.json import dictFromJsonFile
+from component_instances import upvComponentInstances
 from components import upvComponents
 from nets import upvNets
 from layout_objects import upvLayoutObjects
@@ -48,7 +49,9 @@ class upvToPme(object):
         print(category.ljust(22), ' - ', end='')
         
         if category == "component_instances":
-            print("Not yet implemented")
+            component_instances = upvComponentInstances(data)
+            
+            self.saveJSON('outputs/components.json', component_instances)
         elif category == "components":
             components = upvComponents(data)
             
