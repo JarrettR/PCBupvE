@@ -27,6 +27,7 @@ def upvComponents(upv_components):
         if len(upv_components[component]['footprints']) > 0:
             used_count += 1
 
+            #todo: investigate multiple footprints
             pads, pins = genComponents(upv_components[component]['footprints'][0]['gen_objs'])
             
             #todo
@@ -90,7 +91,6 @@ def genComponents(data):
         if ('shape' in pin['attributes']) == False:
             #whoops
             pass
-            #print('')
         elif pin['attributes']['shape'] == 'rectangle':
             shapes['type'] = 'rect'
         elif pin['attributes']['shape'] == 'rounded rectangle':
@@ -100,15 +100,19 @@ def genComponents(data):
         else:
             raise ValueError("I haven\'t seen component %s before! Please report an issue!" % pin['attributes']['shape'])
             
-        #Unique name
-        m = hashlib.md5()
-        m.update(pickle.dumps(shapes) + pickle.dumps(drills))
-        name = m.hexdigest()
+        name = genName([shapes, drills])
         pads[name] = { 'shapes': [shapes], 'drills': drills }
         
         pins[len(pins)] = { 'layout': { 'pad': name, 'rotate': rotate, 'location': [x, y] } }
 
     return pads, pins
+
+def genName(entropy):
+    #Unique name
+    m = hashlib.md5()
+    m.update(pickle.dumps(entropy))
+    name = m.hexdigest()
+    return name
 
 
 def nmToMm(nm):
