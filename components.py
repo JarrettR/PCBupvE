@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import json, pickle, hashlib
+import json, pickle, hashlib, math
 
 from pprint import pprint
 
@@ -20,6 +20,7 @@ def upvComponents(upv_components):
     used_count = 0
 
     components = {}
+    name = []
 
     for component in upv_components:
         count += 1
@@ -41,6 +42,16 @@ def upvComponents(upv_components):
                 }
 
             components[component] = data
+        else:
+            data = {
+                'pins': {},
+                'layout': {},
+                'pads': {},
+                'meta': upv_components[component]['name']
+                }
+
+            components[component] = data
+            
 
     print(used_count, "components processed of", count)
     return(components)
@@ -53,28 +64,34 @@ def genComponents(data):
     for pin in data:
         name = ''
         shapes = {}
-        drills = {}
 
         #todo: determine if this even matters
         if pin['attributes']['type'] == 'padstack':
             pass
         elif pin['attributes']['type'] == 'plated through hole':
             #todo: flesh out
-            drills = {'diameter': nmToMm(pin['attributes']['internal_diameter'])}
+            drills = { 'diameter': nmToMm(pin['attributes']['internal_diameter']) }
         elif pin['attributes']['type'] == 'center cross':
             break
         else:
             raise ValueError("I haven\'t seen pin %s type before! Please report an issue!" % pin['attributes']['type'])
-
-        if ('width' in pin['attributes']) == True:
-            shapes['width'] = nmToMm(pin['attributes']['width'])
-        if ('height' in pin['attributes']) == True:
-            shapes['height'] = nmToMm(pin['attributes']['height'])
             
-        rotate = pin['rotation']
+        rotate = pin['rotation'] * 180
         x = nmToMm(pin['x'])
         y = -1 * nmToMm(pin['y'])
         #todo: attrib-layers, flip
+
+        print(rotate, math.cos(math.radians(rotate)))
+        if ('width' in pin['attributes']) == True:
+            shapes['width'] = nmToMm(pin['attributes']['width'])
+            x += (shapes['width'] / 2) * math.cos(math.radians(rotate))
+            y += (shapes['width'] / 2) * math.sin(math.radians(rotate))
+        if ('height' in pin['attributes']) == True:
+            shapes['height'] = nmToMm(pin['attributes']['height'])
+            #y += shapes['height'] / 2
+            x -= (shapes['height'] / 2) * math.sin(math.radians(rotate))
+            y += (shapes['height'] / 2) * math.cos(math.radians(rotate))
+            
 
         #layer
         if pin['layer'] == 'top copper':
@@ -89,8 +106,9 @@ def genComponents(data):
         #shape
         #todo: circle, path
         if ('shape' in pin['attributes']) == False:
-            #whoops
-            pass
+            if ('hole_shape' in pin['attributes']) == True:
+                shapes['type'] = 'circle'
+                shapes['diameter'] = nmToMm(pin['attributes']['plating_diameter'])
         elif pin['attributes']['shape'] == 'rectangle':
             shapes['type'] = 'rect'
         elif pin['attributes']['shape'] == 'rounded rectangle':
@@ -100,8 +118,13 @@ def genComponents(data):
         else:
             raise ValueError("I haven\'t seen component %s before! Please report an issue!" % pin['attributes']['shape'])
             
-        name = genName([shapes, drills])
-        pads[name] = { 'shapes': [shapes], 'drills': drills }
+        if ('drills' in locals()) == True:
+            name = genName([shapes, drills])
+            pads[name] = { 'shapes': [shapes], 'drills': [drills] }
+        else:
+            name = genName([shapes])
+            pads[name] = { 'shapes': [shapes] }
+        
         
         pins[len(pins)] = { 'layout': { 'pad': name, 'rotate': rotate, 'location': [x, y] } }
 
