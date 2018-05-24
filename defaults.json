@@ -1,0 +1,516 @@
+{
+    "D1": {
+      "footprint": "b2e5066f9fcfd896",
+      "layer": "top",
+      "location": [
+            38.425,
+            15.2
+      ],
+      "rotate": 0,
+      "show": true,
+      "silkscreen": {
+        "refdef": {
+          "location": [
+            0,
+            2
+          ],
+          "rotate": 0,
+          "show": false
+        }
+      }
+    },
+    "U1": {
+        "footprint": "b2e5066f9fcfd896",
+        "layer": "top",
+        "location": [
+            38.425,
+            15.2
+        ],
+        "rotate": 0.0,
+        "show": "true",
+        "silkscreen": {
+            "refdes": {
+                "location": [
+                    0,
+                    2
+                ],
+                "rotate": 0,
+                "show": "true"
+            }
+        }
+    },
+    "D3": {
+      "footprint": "0603_led",
+      "layer": "top",
+      "location": [
+        12.238606,
+        8.211079
+      ],
+      "rotate": -23,
+      "show": true,
+      "silkscreen": {
+        "refdef": {
+          "location": [
+            0,
+            2
+          ],
+          "rotate": 90,
+          "show": false
+        }
+      }
+    },
+    "D4": {
+      "footprint": "0603_led",
+      "layer": "top",
+      "location": [
+        -0.178648,
+        16.211671
+      ],
+      "rotate": -64,
+      "show": true,
+      "silkscreen": {
+        "refdef": {
+          "location": [
+            0,
+            2
+          ],
+          "rotate": 90,
+          "show": false
+        }
+      }
+    },
+    "D5": {
+      "footprint": "0603_led",
+      "layer": "top",
+      "location": [
+        -9.124033,
+        14.32209
+      ],
+      "rotate": -110,
+      "show": true,
+      "silkscreen": {
+        "refdef": {
+          "location": [
+            0,
+            2
+          ],
+          "rotate": 90,
+          "show": false
+        }
+      }
+    },
+    "D6": {
+      "footprint": "0603_led",
+      "layer": "top",
+      "location": [
+        -15.184078,
+        4.932534
+      ],
+      "rotate": 205,
+      "show": true,
+      "silkscreen": {
+        "refdef": {
+          "location": [
+            0,
+            2
+          ],
+          "rotate": 90,
+          "show": false
+        }
+      }
+    },
+    "D7": {
+      "footprint": "0603_led",
+      "layer": "top",
+      "location": [
+        -10.513007,
+        -4.588624
+      ],
+      "rotate": 141,
+      "show": true,
+      "silkscreen": {
+        "refdef": {
+          "location": [
+            0,
+            2
+          ],
+          "rotate": 90,
+          "show": false
+        }
+      }
+    },
+    "D8": {
+      "footprint": "0603_led",
+      "layer": "top",
+      "location": [
+        0.360252,
+        -2.440277
+      ],
+      "rotate": 40,
+      "show": true,
+      "silkscreen": {
+        "refdef": {
+          "location": [
+            0,
+            2
+          ],
+          "rotate": 90,
+          "show": false
+        }
+      }
+    },
+    "R1": {
+      "footprint": "0603",
+      "layer": "bottom",
+      "location": [
+        9.653463,
+        2.387832
+      ],
+      "rotate": 90,
+      "show": true,
+      "silkscreen": {
+        "refdef": {
+          "location": [
+            -2.5,
+            0
+          ],
+          "rotate": -90,
+          "show": false
+        }
+      }
+    },
+    "R2": {
+      "footprint": "0603",
+      "layer": "bottom",
+      "location": [
+        11.313129,
+        2.50922
+      ],
+      "rotate": 90,
+      "show": true,
+      "silkscreen": {
+        "refdef": {
+          "location": [
+            -2.5,
+            0
+          ],
+          "rotate": -90,
+          "show": false
+        }
+      }
+    },
+    "R3": {
+      "footprint": "0603",
+      "layer": "bottom",
+      "location": [
+        6.992771,
+        6.250145
+      ],
+      "rotate": 90,
+      "show": true,
+      "silkscreen": {
+        "refdef": {
+          "location": [
+            -2.5,
+            0
+          ],
+          "rotate": -90,
+          "show": false
+        }
+      }
+    },
+    "R4": {
+      "footprint": "0603",
+      "layer": "bottom",
+      "location": [
+        -2.627482,
+        12.41155
+      ],
+      "rotate": 90,
+      "show": true,
+      "silkscreen": {
+        "refdef": {
+          "location": [
+            -2.5,
+            0
+          ],
+          "rotate": -90,
+          "show": false
+        }
+      }
+    },
+    "R5": {
+      "footprint": "0603",
+      "layer": "bottom",
+      "location": [
+        -11.725661,
+        10.900586
+      ],
+      "rotate": 90,
+      "show": true,
+      "silkscreen": {
+        "refdef": {
+          "location": [
+            -2.5,
+            0
+          ],
+          "rotate": -90,
+          "show": false
+        }
+      }
+    },
+    "R6": {
+      "footprint": "0603",
+      "layer": "bottom",
+      "location": [
+        -10.449871,
+        4.959747
+      ],
+      "rotate": 90,
+      "show": true,
+      "silkscreen": {
+        "refdef": {
+          "location": [
+            -2.5,
+            0
+          ],
+          "rotate": -90,
+          "show": false
+        }
+      }
+    },
+    "R7": {
+      "footprint": "0603",
+      "layer": "bottom",
+      "location": [
+        -8.822444,
+        4.910394
+      ],
+      "rotate": 90,
+      "show": true,
+      "silkscreen": {
+        "refdef": {
+          "location": [
+            -2.5,
+            0
+          ],
+          "rotate": -90,
+          "show": false
+        }
+      }
+    },
+    "R8": {
+      "footprint": "0603",
+      "layer": "bottom",
+      "location": [
+        -6.985343,
+        5.019695
+      ],
+      "rotate": 90,
+      "show": true,
+      "silkscreen": {
+        "refdef": {
+          "location": [
+            -2.5,
+            0
+          ],
+          "rotate": -90,
+          "show": false
+        }
+      }
+    }
+  },
+  "config": {
+    "name": "Shallow",
+    "no-docs": false,
+    "no-drill-index": false,
+    "no-flashes": false,
+    "no-layer-index": false,
+    "rev": "first",
+    "style-layout": "default",
+    "units": "mm"
+  },
+  "distances": {
+    "from-pour-to": {
+      "drill": 0.25,
+      "outline": 0.4,
+      "pad": 0.25,
+      "route": 0.25
+    },
+    "soldermask": {
+      "circle-buffer": 0.05,
+      "path-scale": 1.05,
+      "rect-buffer": 0.05
+    },
+    "solderpaste": {
+      "circle-buffer": -0.1,
+      "path-scale": 0.9,
+      "rect-buffer": -0.1
+    }
+  },
+  "documentation": {
+    "board-details": {
+      "font-family": "Overlock-Regular-OTF-webfont",
+      "font-size": "1.5mm",
+      "letter-spacing": "0mm",
+      "line-height": "1.5mm",
+      "location": [
+        49.490383,
+        17.206889
+      ],
+      "rotate": 0,
+      "style": "fill",
+      "type": "text",
+      "value": "Board details:\nName: \nRevision: \nDescription: \nLicense: \nDesigner: "
+    },
+    "manufacturing": {
+      "font-family": "Overlock-Regular-OTF-webfont",
+      "font-size": "1.5mm",
+      "letter-spacing": "0mm",
+      "line-height": "1.5mm",
+      "location": [
+        49.693579,
+        4.7228886
+      ],
+      "rotate": 0,
+      "style": "fill",
+      "type": "text",
+      "value": "Manufacturing:\nRoHS and lead free compliant manufacturing process\nUnit of length: Millimetre (mm)\nNumber of layers: 2 ('top', 'bottom')\nBoard thickness: 1.6 mm\nMaterial: FR4 35/35 um copper\nSilkscreen: top, bottom, white\nSoldermask: top, bottom, purple\nSurface finish: ENIG"
+    },
+    "pcbmode": {
+      "font-family": "Overlock-Regular-OTF-webfont",
+      "font-size": "1.2mm",
+      "letter-spacing": "0mm",
+      "line-height": "1.2mm",
+      "location": [
+        45.883588,
+        -5.7401114
+      ],
+      "rotate": 0,
+      "style": "fill",
+      "type": "text",
+      "value": "Designed with PCBmodE, an open source software\n     http://pcbmode.com"
+    }
+  },
+  "drill-index": {
+    "location": [
+      33.762299,
+      -11.572111
+    ]
+  },
+  "drills": {},
+  "files": {
+    "routing-data": "default_routing.json",
+    "routing-svg": "default.svg"
+  },
+  "gerber": {
+    "decimals": 6,
+    "digits": 6,
+    "min-segment-length": 0.05,
+    "steps-per-segment": 100
+  },
+  "layer-control": {
+    "assembly": {
+      "hide": false,
+      "lock": false,
+      "place": true
+    },
+    "conductor": {
+      "hide": false,
+      "lock": false,
+      "pads": {
+        "hide": false,
+        "lock": false,
+        "place": true
+      },
+      "place": true,
+      "pours": {
+        "hide": false,
+        "lock": true,
+        "place": true
+      },
+      "routing": {
+        "hide": false,
+        "lock": false,
+        "place": true
+      }
+    },
+    "dimensions": {
+      "hide": false,
+      "lock": true,
+      "place": true
+    },
+    "documentation": {
+      "hide": false,
+      "lock": false,
+      "place": true
+    },
+    "drills": {
+      "hide": false,
+      "lock": false,
+      "place": true
+    },
+    "origin": {
+      "hide": false,
+      "lock": true,
+      "place": false
+    },
+    "outline": {
+      "hide": false,
+      "lock": true,
+      "place": true
+    },
+    "placement": {
+      "hide": false,
+      "lock": false,
+      "place": true
+    },
+    "silkscreen": {
+      "hide": false,
+      "lock": false,
+      "place": true
+    },
+    "soldermask": {
+      "hide": false,
+      "lock": false,
+      "place": true
+    },
+    "solderpaste": {
+      "hide": true,
+      "lock": true,
+      "place": false
+    }
+  },
+  "outline": {
+    "shape": {
+      "height": 36,
+      "radii": {
+        "bl": 3,
+        "br": 3,
+        "tl": 3,
+        "tr": 3
+      },
+      "type": "path",
+      "value": "m 0,0 c 0,0 z",
+      "width": 36
+    }
+  },
+  "shapes": {
+  },
+  "soldermask": {
+    "circle-buffer": 0.05,
+    "path-scale": 1.05,
+    "rect-buffer": 0.05
+  },
+  "solderpaste": {
+    "circle-buffer": -0.1,
+    "path-scale": 0.9,
+    "rect-buffer": -0.1
+  },
+  "stackup": {
+    "name": "two-layer"
+  },
+  "vias": {
+    "default-via": "VIA"
+  }
+}
