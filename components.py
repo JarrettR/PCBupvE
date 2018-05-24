@@ -59,20 +59,20 @@ def genComponents(data):
             pass
         elif pin['attributes']['type'] == 'plated through hole':
             #todo: flesh out
-            drills = {'diameter': nmToPx(pin['attributes']['internal_diameter'])}
+            drills = {'diameter': nmToMm(pin['attributes']['internal_diameter'])}
         elif pin['attributes']['type'] == 'center cross':
             break
         else:
             raise ValueError("I haven\'t seen pin %s type before! Please report an issue!" % pin['attributes']['type'])
 
         if ('width' in pin['attributes']) == True:
-            shapes['width'] = nmToPx(pin['attributes']['width'])
+            shapes['width'] = nmToMm(pin['attributes']['width'])
         if ('height' in pin['attributes']) == True:
-            shapes['height'] = nmToPx(pin['attributes']['height'])
+            shapes['height'] = nmToMm(pin['attributes']['height'])
             
         rotate = pin['rotation']
-        x = nmToPx(pin['x'])
-        y = nmToPx(pin['y'])
+        x = nmToMm(pin['x'])
+        y = -1 * nmToMm(pin['y'])
         #todo: attrib-layers, flip
 
         #layer
@@ -111,6 +111,5 @@ def genComponents(data):
     return pads, pins
 
 
-def nmToPx(nm):
-    #Better use Inkscape 0.92 or later
+def nmToMm(nm):
     return (int(nm) / 1000000)

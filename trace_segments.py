@@ -23,14 +23,14 @@ def upvTraceSegments(upv_trace_segments):
             raise ValueError('Wrong number of trace_segment children! Please report an issue!')
             
         
-        value = 'm ' + \
-            str(nmToPx(trace_segment['p1']['x'])) + ',' + \
-            str(nmToPx(trace_segment['p1']['y'])) + ' c ' + \
-            str(nmToPx(trace_segment['p2']['x'])) + ',' + \
-            str(nmToPx(trace_segment['p2']['y']))
+        value = 'M ' + \
+            str(nmToMm(trace_segment['p1']['x'])) + ',' + \
+            str(-1 * nmToMm(trace_segment['p1']['y'])) + ' ' + \
+            str(nmToMm(trace_segment['p2']['x'])) + ',' + \
+            str(-1 * nmToMm(trace_segment['p2']['y']))
         line = {
             #In px
-            'stroke-width': nmToPx(trace_segment['width']),
+            'stroke-width': nmToMm(trace_segment['width']),
             'style': 'stroke',
             'type': 'path',
             'value': value
@@ -49,6 +49,5 @@ def upvTraceSegments(upv_trace_segments):
     print(count, "trace_segments processed")
     return(routes)
     
-def nmToPx(nm):
-    #Better use Inkscape 0.92 or later
-    return (96 * (nm * 0.0000000393701))
+def nmToMm(nm):
+    return (int(nm) / 1000000)

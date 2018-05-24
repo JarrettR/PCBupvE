@@ -119,7 +119,7 @@ class upvToPme(object):
             self.process_category(category, json_dict[category])
             
         
-        self.saveJSON('routes.json', self.routes)
+        self.saveJSON('outputs/routes.json', self.routes)
 
 
         print("Done!")

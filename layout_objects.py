@@ -9,27 +9,6 @@ def upvLayoutObjects(upv_layout_objects):
     Layout Objects
     So far only seen vias in this
     """
-    '''
-    "12d213e32": {
-      "assembly": {
-        "refdef": {
-          "show": false
-        }
-      },
-      "footprint": "via",
-      "layer": "bottom",
-      "location": [
-        9.876513,
-        7.307817
-      ],
-      "rotate": 0,
-      "silkscreen": {
-        "refdef": {
-          "show": false
-        }
-      }
-    },
-    '''
     count = 0
     
     vias = {}
@@ -56,7 +35,7 @@ def upvLayoutObjects(upv_layout_objects):
             raise ValueError('Unexpected number of layout_object attributes! Please report an issue!')
             
         
-        location = [ nmToPx(layout_object['x']), nmToPx(layout_object['y']) ]
+        location = [ nmToMm(layout_object['x']), nmToMm(layout_object['y']) ]
         footprint = createViaFootprint(layout_object['attributes'])
         
         via = {
@@ -80,6 +59,5 @@ def createViaFootprint(attributes):
     #todo: create footprint
     return 'via'
     
-def nmToPx(nm):
-    #Better use Inkscape 0.92 or later
-    return (96 * (nm * 0.0000000393701))
+def nmToMm(nm):
+    return (int(nm) / 1000000)
