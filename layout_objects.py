@@ -4,7 +4,7 @@ import json
 
 from pprint import pprint
 
-def upvLayoutObjects(upv_layout_objects):
+def upvLayoutObjects(upv_layout_objects, bounds):
     """
     Layout Objects
     So far only seen vias in this
@@ -35,7 +35,12 @@ def upvLayoutObjects(upv_layout_objects):
             raise ValueError('Unexpected number of layout_object attributes! Please report an issue!')
             
         
-        location = [ nmToMm(layout_object['x']), nmToMm(layout_object['y']) ]
+        translate_x = bounds['max_x'] - bounds['min_x']
+        translate_x += translate_x / 2
+        
+        translate_y = bounds['max_y'] - bounds['min_y']
+        #translate_y += translate_y / 2
+        location = [ nmToMm(layout_object['x'] - translate_x), nmToMm(layout_object['y'] - translate_y) ]
         footprint = createViaFootprint(layout_object['attributes'])
         
         via = {

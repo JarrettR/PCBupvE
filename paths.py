@@ -20,12 +20,12 @@ def upvPaths(upv_paths):
         if path['layer'] == 'mechanical details':
             used_count += 1
             
-            min_x, max_x, min_y, max_y = findLimits(path['points'])
-            translated_path = translate(path['points'], -1 * min_x, -1 * min_y)
+            bounds = findLimits(path['points'])
+            translated_path = translate(path['points'], -1 * bounds['min_x'], -1 * bounds['min_y'])
             svg = createSVG(translated_path)
 
     print(used_count, "paths processed of", count)
-    return(svg)
+    return(svg, bounds)
     
 def findLimits(path):
     max_x = 0
@@ -49,7 +49,7 @@ def findLimits(path):
         elif min_y > point['y']:
             min_y = point['y']
         
-    return min_x, max_x, min_y, max_y
+    return { 'min_x': min_x, 'max_x': max_x, 'min_y': min_y, 'max_y': max_y }
     
 def createSVG(path):
     value = ''

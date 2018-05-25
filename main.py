@@ -60,11 +60,9 @@ class upvToPme(object):
         print(category.ljust(22), ' - ', end='')
         
         if category == "component_instances":
-            self.component_instances = upvComponentInstances(data)
+            self.component_instances = upvComponentInstances(data, self.bounds)
         elif category == "components":
-            components = upvComponents(data)
-            for component in components:
-                self.saveJSON('outputs/%s.json' % component, components[component])
+            self.components = upvComponents(data)
                 
         elif category == "design_attributes":
             print("Not yet implemented")
@@ -75,7 +73,7 @@ class upvToPme(object):
         elif category == "layout_body_attributes":
             print("Not yet implemented")
         elif category == "layout_objects":
-            self.routes.update(upvLayoutObjects(data))
+            self.routes.update(upvLayoutObjects(data, self.bounds))
         elif category == "module_instances":
             print("Not yet implemented")
         elif category == "modules":
@@ -85,7 +83,7 @@ class upvToPme(object):
         elif category == "nets":
             upvNets(data)
         elif category == "paths":
-            self.outline = upvPaths(data)
+            self.outline, self.bounds = upvPaths(data)
         elif category == "pcb_text":
             print("Not yet implemented")
         elif category == "pins":
@@ -99,7 +97,7 @@ class upvToPme(object):
         elif category == "shapes":
             print("Not yet implemented")
         elif category == "trace_segments":
-            self.routes.update(upvTraceSegments(data))
+            self.routes.update(upvTraceSegments(data, self.bounds))
         elif category == "version":
             print("Nothing to be done")
         else:
@@ -124,11 +122,21 @@ class upvToPme(object):
         print("")
         print("Processing categories...")
         print("")
+        
+        self.outline, self.bounds = upvPaths(self.json_dict['paths'])
+        
         for category in self.json_dict:
             self.process_category(category, self.json_dict[category])
             
+        #Outlines, component instances
         self.mergeDefaults('outputs/default.json')
+        
+        #Routes
         self.saveJSON('outputs/routes.json', self.routes)
+        
+        #Components
+        for component in self.components:
+            self.saveJSON('outputs/%s.json' % component, self.components[component])
 
 
         print("Done!")

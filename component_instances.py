@@ -2,7 +2,7 @@
 
 import json
 
-def upvComponentInstances(upv_component_instances):
+def upvComponentInstances(upv_component_instances, bounds):
     """
     Component Instances
     Actual footprints placed on PCB, references upvComponent
@@ -19,7 +19,12 @@ def upvComponentInstances(upv_component_instances):
             used_count += 1
             name = component_instance['attributes']['refdes']
             
-            location = [nmToMm(component_instance['footprint_pos']['x']), nmToMm(component_instance['footprint_pos']['y'])]
+            translate_x = bounds['max_x'] - bounds['min_x']
+            translate_x += translate_x / 2
+            
+            translate_y = bounds['max_y'] - bounds['min_y']
+            #translate_y += translate_y / 2
+            location = [nmToMm(component_instance['footprint_pos']['x'] - translate_x), nmToMm(component_instance['footprint_pos']['y'] - translate_y)]
 
             silkscreen = {
                 'refdef': {
