@@ -8,6 +8,7 @@ from pcbmode.utils.json import dictFromJsonFile
 from component_instances import upvComponentInstances
 from components import upvComponents
 from nets import upvNets
+from paths import upvPaths
 from layout_objects import upvLayoutObjects
 from trace_segments import upvTraceSegments
 
@@ -22,6 +23,16 @@ class upvToPme(object):
         # parse arguments
         args = self.argSetup()
         self.cmdline_args = args.parse_args()
+
+        # input in Upverter OpenJSON format
+        input_name = self.cmdline_args.filein[0]
+        if self.cmdline_args.boards is not None:
+            self.board_name = self.cmdline_args.boards[0]
+
+        self.json_dict = dictFromJsonFile(input_name)
+
+        #This project built on version 0.3.0
+        print("Input file loaded, OpenJSON format version:", self.json_dict['version']['file_version'])
         
         self.convert()
         
@@ -39,7 +50,7 @@ class upvToPme(object):
                           
         args.add_argument('-b', '--board-name',
                           dest='boards', required=False, nargs=1,
-                          help='Output will replace all files in specelified board\'s directory')
+                          help='Output will replace all files in specified board\'s directory')
 
 
         return args
@@ -75,7 +86,7 @@ class upvToPme(object):
         elif category == "nets":
             upvNets(data)
         elif category == "paths":
-            print("Not yet implemented")
+            print(upvPaths(data))
         elif category == "pcb_text":
             print("Not yet implemented")
         elif category == "pins":
@@ -110,23 +121,11 @@ class upvToPme(object):
             json.dump(data, outfile, indent=4, sort_keys=True)
 
     def convert(self):
-
-
-        # input in Upverter OpenJSON format
-        input_name = self.cmdline_args.filein[0]
-        if self.cmdline_args.boards is not None:
-            board_name = self.cmdline_args.boards[0]
-
-        json_dict = dictFromJsonFile(input_name)
-        
-        #This project built on version 0.3.0
-        print("Input file loaded, OpenJSON format version:", json_dict['version']['file_version'])
-        
         print("")
         print("Processing categories...")
         print("")
-        for category in json_dict:
-            self.process_category(category, json_dict[category])
+        for category in self.json_dict:
+            self.process_category(category, self.json_dict[category])
             
         self.mergeDefaults('outputs/default.json')
         self.saveJSON('outputs/routes.json', self.routes)
@@ -136,5 +135,4 @@ class upvToPme(object):
 
 
 if __name__ == "__main__":
-    print('a')
     obj = upvToPme()
