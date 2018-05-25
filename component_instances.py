@@ -19,13 +19,13 @@ def upvComponentInstances(upv_component_instances):
             used_count += 1
             name = component_instance['attributes']['refdes']
             
-            location = [nmToMm(component_instance['footprint_pos']['x']), -1 * nmToMm(component_instance['footprint_pos']['y'])]
+            location = [nmToMm(component_instance['footprint_pos']['x']), nmToMm(component_instance['footprint_pos']['y'])]
 
             silkscreen = {
                 'refdef': {
                     'location': [0, 2],
                     'rotate': 0,
-                    'show': 'true'
+                    'show': True
                     }
                 }
                 
@@ -34,7 +34,7 @@ def upvComponentInstances(upv_component_instances):
                 'layer': component_instance['footprint_pos']['side'],
                 'location': location,
                 'rotate': component_instance['footprint_pos']['rotation'] * 180,
-                'show': 'true',
+                'show': True,
                 'silkscreen': silkscreen
                 }
 

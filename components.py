@@ -81,14 +81,12 @@ def genComponents(data):
         y = -1 * nmToMm(pin['y'])
         #todo: attrib-layers, flip
 
-        print(rotate, math.cos(math.radians(rotate)))
         if ('width' in pin['attributes']) == True:
             shapes['width'] = nmToMm(pin['attributes']['width'])
             x += (shapes['width'] / 2) * math.cos(math.radians(rotate))
             y += (shapes['width'] / 2) * math.sin(math.radians(rotate))
         if ('height' in pin['attributes']) == True:
             shapes['height'] = nmToMm(pin['attributes']['height'])
-            #y += shapes['height'] / 2
             x -= (shapes['height'] / 2) * math.sin(math.radians(rotate))
             y += (shapes['height'] / 2) * math.cos(math.radians(rotate))
             

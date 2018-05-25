@@ -49,9 +49,8 @@ class upvToPme(object):
         print(category.ljust(22), ' - ', end='')
         
         if category == "component_instances":
-            component_instances = upvComponentInstances(data)
+            self.component_instances = upvComponentInstances(data)
             
-            self.saveJSON('outputs/components.json', component_instances)
         elif category == "components":
             components = upvComponents(data)
             
@@ -101,6 +100,14 @@ class upvToPme(object):
         with open(filename, 'w') as outfile:
             json.dump(data, outfile, indent=4, sort_keys=True)
 
+    def mergeDefaults(self, filename):
+        with open('defaults.json') as f:
+            data = json.load(f)
+            
+        data['components'] = self.component_instances
+        
+        with open(filename, 'w') as outfile:
+            json.dump(data, outfile, indent=4, sort_keys=True)
 
     def convert(self):
 
@@ -121,12 +128,11 @@ class upvToPme(object):
         for category in json_dict:
             self.process_category(category, json_dict[category])
             
-        
+        self.mergeDefaults('outputs/default.json')
         self.saveJSON('outputs/routes.json', self.routes)
 
 
         print("Done!")
-
 
 
 if __name__ == "__main__":
