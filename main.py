@@ -61,12 +61,11 @@ class upvToPme(object):
         
         if category == "component_instances":
             self.component_instances = upvComponentInstances(data)
-            
         elif category == "components":
             components = upvComponents(data)
-            
             for component in components:
                 self.saveJSON('outputs/%s.json' % component, components[component])
+                
         elif category == "design_attributes":
             print("Not yet implemented")
         elif category == "layer_options":
@@ -86,7 +85,7 @@ class upvToPme(object):
         elif category == "nets":
             upvNets(data)
         elif category == "paths":
-            print(upvPaths(data))
+            self.outline = upvPaths(data)
         elif category == "pcb_text":
             print("Not yet implemented")
         elif category == "pins":
@@ -116,6 +115,7 @@ class upvToPme(object):
             data = json.load(f)
             
         data['components'] = self.component_instances
+        data['outline']['shape']['value'] = self.outline
         
         with open(filename, 'w') as outfile:
             json.dump(data, outfile, indent=4, sort_keys=True)
