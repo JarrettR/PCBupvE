@@ -26,7 +26,9 @@ class upvToPme(object):
 
         # input in Upverter OpenJSON format
         input_name = self.cmdline_args.filein[0]
-        if self.cmdline_args.boards is not None:
+        if self.cmdline_args.boards is None:
+            self.board_name = 'default'
+        else:
             self.board_name = self.cmdline_args.boards[0]
 
         self.json_dict = dictFromJsonFile(input_name)
@@ -124,19 +126,25 @@ class upvToPme(object):
         print("")
         
         self.outline, self.bounds = upvPaths(self.json_dict['paths'])
+        path = 'boards/' + self.board_name + '/'
+        
+        if not os.path.exists(path):
+            os.makedirs(path)
+        if not os.path.exists(path + 'components/'):
+            os.makedirs(path + 'components/')
         
         for category in self.json_dict:
             self.process_category(category, self.json_dict[category])
             
         #Outlines, component instances
-        self.mergeDefaults('outputs/default.json')
+        self.mergeDefaults(path + self.board_name + '.json')
         
         #Routes
-        self.saveJSON('outputs/routes.json', self.routes)
+        self.saveJSON(path + self.board_name + '_routing.json', self.routes)
         
         #Components
         for component in self.components:
-            self.saveJSON('outputs/%s.json' % component, self.components[component])
+            self.saveJSON(path + 'components/%s.json' % component, self.components[component])
 
 
         print("Done!")
