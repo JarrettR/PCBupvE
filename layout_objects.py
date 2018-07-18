@@ -35,12 +35,18 @@ def upvLayoutObjects(upv_layout_objects, bounds):
             raise ValueError('Unexpected number of layout_object attributes! Please report an issue!')
             
         
-        translate_x = bounds['max_x'] - bounds['min_x']
-        translate_x += translate_x / 2
+        bounding_box_x = bounds['max_x'] - bounds['min_x']
+        translate_x = bounds['min_x']
+        translate_x += bounding_box_x / 2
         
-        translate_y = bounds['max_y'] - bounds['min_y']
-        #translate_y += translate_y / 2
-        location = [ nmToMm(layout_object['x'] - translate_x), nmToMm(layout_object['y'] - translate_y) ]
+        bounding_box_y = bounds['max_y'] - bounds['min_y']
+        translate_y = bounds['min_y']
+        translate_y += bounding_box_y / 2
+        
+        x = nmToMm(layout_object['x'] - translate_x)
+        y = nmToMm(layout_object['y'] - translate_y)
+        
+        location = [ x, y ]
         footprint = createViaFootprint(layout_object['attributes'])
         
         via = {

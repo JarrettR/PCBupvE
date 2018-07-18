@@ -19,11 +19,14 @@ def upvComponentInstances(upv_component_instances, bounds):
             used_count += 1
             name = component_instance['attributes']['refdes']
             
-            translate_x = bounds['max_x'] - bounds['min_x']
-            translate_x += translate_x / 2
+            bounding_box_x = bounds['max_x'] - bounds['min_x']
+            translate_x = bounds['min_x']
+            translate_x += bounding_box_x / 2
             
-            translate_y = bounds['max_y'] - bounds['min_y']
-            #translate_y += translate_y / 2
+            bounding_box_y = bounds['max_y'] - bounds['min_y']
+            translate_y = bounds['min_y']
+            translate_y += bounding_box_y / 2
+            
             location = [nmToMm(component_instance['footprint_pos']['x'] - translate_x), nmToMm(component_instance['footprint_pos']['y'] - translate_y)]
 
             silkscreen = {

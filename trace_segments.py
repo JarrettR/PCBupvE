@@ -22,18 +22,24 @@ def upvTraceSegments(upv_trace_segments, bounds):
         if len(trace_segment) != 6:
             raise ValueError('Wrong number of trace_segment children! Please report an issue!')
             
-        translate_x = bounds['max_x'] - bounds['min_x']
-        translate_x += translate_x / 2
+        bounding_box_x = bounds['max_x'] - bounds['min_x']
+        translate_x = bounds['min_x']
+        translate_x += bounding_box_x / 2
         
-        translate_y = bounds['max_y'] - bounds['min_y']
-        #translate_y += translate_y / 2
-            
+        bounding_box_y = bounds['max_y'] - bounds['min_y']
+        translate_y = bounds['min_y']
+        translate_y += bounding_box_y / 2
+        
+        x1 = str(nmToMm(trace_segment['p1']['x'] - translate_x))
+        y1 = str(-1 * nmToMm(trace_segment['p1']['y'] - translate_y))
+        x2 = str(nmToMm(trace_segment['p2']['x'] - translate_x))
+        y2 = str(-1 * nmToMm(trace_segment['p2']['y'] - translate_y))
         
         value = 'M ' + \
-            str(nmToMm(trace_segment['p1']['x'] - translate_x)) + ',' + \
-            str(-1 * nmToMm(trace_segment['p1']['y'] - translate_y)) + ' ' + \
-            str(nmToMm(trace_segment['p2']['x'] - translate_x)) + ',' + \
-            str(-1 * nmToMm(trace_segment['p2']['y'] - translate_y))
+            x1 + ',' + \
+            y1 + ' ' + \
+            x2 + ',' + \
+            y2
         line = {
             #In px
             'stroke-width': nmToMm(trace_segment['width']),
