@@ -136,7 +136,7 @@
     },
     "outline": {
       "hide": false,
-      "lock": true,
+      "lock": false,
       "place": true
     },
     "placement": {
