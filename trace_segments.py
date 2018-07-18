@@ -41,7 +41,6 @@ def upvTraceSegments(upv_trace_segments, bounds):
             x2 + ',' + \
             y2
         line = {
-            #In px
             'stroke-width': nmToMm(trace_segment['width']),
             'style': 'stroke',
             'type': 'path',

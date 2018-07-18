@@ -9,6 +9,7 @@ from component_instances import upvComponentInstances
 from components import upvComponents
 from nets import upvNets
 from paths import upvPaths
+from pours import upvPours
 from layout_objects import upvLayoutObjects
 from trace_segments import upvTraceSegments
 
@@ -91,7 +92,7 @@ class upvToPme(object):
         elif category == "pins":
             print("Not yet implemented")
         elif category == "pours":
-            print("Not yet implemented")
+            self.pours, self.shape_instances = upvPours(data)
         elif category == "rulers":
             print("Not yet implemented")
         elif category == "shape_poses":
@@ -116,6 +117,7 @@ class upvToPme(object):
             
         data['components'] = self.component_instances
         data['outline']['shape']['value'] = self.outline
+        data['shapes'] = self.shape_instances
         
         with open(filename, 'w') as outfile:
             json.dump(data, outfile, indent=4, sort_keys=True)
@@ -132,6 +134,8 @@ class upvToPme(object):
             os.makedirs(path)
         if not os.path.exists(path + 'components/'):
             os.makedirs(path + 'components/')
+        if not os.path.exists(path + 'shapes/'):
+            os.makedirs(path + 'shapes/')
         
         for category in self.json_dict:
             self.process_category(category, self.json_dict[category])
@@ -145,6 +149,10 @@ class upvToPme(object):
         #Components
         for component in self.components:
             self.saveJSON(path + 'components/%s.json' % component, self.components[component])
+            
+        #Pours
+        for pour in self.pours:
+            self.saveJSON(path + 'shapes/%s.json' % pour, self.pours[pour])
 
 
         print("Done!")
