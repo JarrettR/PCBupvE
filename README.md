@@ -22,18 +22,18 @@ This is a conversion tool to Upverter's OpenJSON format and turn it into a set o
 
 ### Status
 
-It largely works. There are some coordinate issues that will go away after some investigation.
+It largely works, but it's not 100%.
 
-Not all elements are supported yet - Currently only components, component instances, vias, traces, outlines.
+Not all elements are supported yet - Currently only components, component instances, vias, traces, pours, outlines.
 
-Silkscreens, shapes, designators, and metadata are all totally possible.
+Silkscreens, shapes, designators, and metadata(like schematics shown on docs!)  are all totally possible.
 
-This also dumps all of the JSON files into a single folder. That should be changed to the proper directory structure.
+Pours have no concepts of nets, so they will not automagically merge with their pads.
 
 
 ### Installation
 
-The latest dev branch of PCBmodE must be installed.
+The latest(as of July '18) dev branch of PCBmodE must be installed.
 
 `pip install git+https://github.com/threebytesfull/pcbmode.git@improve-test-coverage`
 
@@ -44,7 +44,7 @@ cd PCBupvE
 python main.py -f .\test_data\688cbc7ec09544c0_15226514270000_openjson.upv
 ```
 
-The following output should happen:
+Somethig like the following output should happen:
 ```
 Input file loaded, OpenJSON format version: 0.3.0
 
@@ -73,17 +73,9 @@ version                 - Nothing to be done
 Done!
 ```
 
-And you'll have a selection of JSON files in the output folder.
+And you'll have a selection of JSON files in the boards folder.
 
-All of the hex names should be dragged into `boards\yourboard\components\`
-
-Rename and drag `default.json` to `boards\yourboard\yourboard.json`
-
-Rename and drag `routes.json` to `boards\yourboard\yourboard_routes.json`
-
-
-
-Run PCBmodE from the parent of your board directory:
+Run PCBmodE from the same directory:
 
 `pcbmode -b yourboard -m`
 
