@@ -16,11 +16,9 @@ def upvPours(upv_pours):
         pours[str(count)] = {'layout': {'pours': {'shapes': [genPour(pour)] } } }
     
         #layer
-        if pour['layer'] == 'top copper':
+        if pour['layer'][0:3] == 'top':
             layer = 'top'
-        elif pour['layer'] == 'top component':
-            layer = 'top'
-        elif pour['layer'] == 'bottom copper':
+        elif pour['layer'][0:6] == 'bottom':
             layer = 'bottom'
         else:
             raise ValueError("I haven\'t seen pour layer %s before! Please report an issue!" % pour['layer'])
