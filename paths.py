@@ -52,13 +52,19 @@ def findLimits(path):
     return { 'min_x': min_x, 'max_x': max_x, 'min_y': min_y, 'max_y': max_y }
     
 def createSVG(path):
+    initial = ''
     value = ''
     i = 0
     for point in path:
         if i == 0:
-            value += 'M ' + str(nmToMm(point['x'])) + ',' + str(-1 * nmToMm(point['y']))
+            initial = str(nmToMm(point['x'])) + ',' + str(-1 * nmToMm(point['y']))
+            value += 'M ' + initial
         else:
             value += ' L ' + str(nmToMm(point['x'])) + ',' + str(-1 * nmToMm(point['y']))
+            
+        #Hack: to fix unclosed paths (https://github.com/boldport/pcbmode/issues/50)
+        value += ' L ' + initial
+        
         i += 1
     value += ' z'
     return value
