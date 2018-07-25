@@ -13,17 +13,21 @@ def upvPaths(upv_paths):
     used_count = 0
 
     paths = {}
+    svg = ''
 
     for path in upv_paths:
         count += 1
+        print("apth ", count)
         
         if path['layer'] == 'mechanical details':
             used_count += 1
             
             bounds = findLimits(path['points'])
             translated_path = translate(path['points'], -1 * bounds['min_x'], -1 * bounds['min_y'])
-            svg = createSVG(translated_path)
+            if svg == '':
+                svg = createSVG(translated_path)
 
+    print(svg)
     print(used_count, "paths processed of", count)
     return(svg, bounds)
     
@@ -62,11 +66,10 @@ def createSVG(path):
         else:
             value += ' L ' + str(nmToMm(point['x'])) + ',' + str(-1 * nmToMm(point['y']))
             
-        #Hack: to fix unclosed paths (https://github.com/boldport/pcbmode/issues/50)
-        value += ' L ' + initial
-        
         i += 1
-    value += ' z'
+    #Hack: to fix unclosed paths (https://github.com/boldport/pcbmode/issues/50)
+    value += ' L ' + initial
+    value += ' z '
     return value
     
 def translate(path, x, y):
