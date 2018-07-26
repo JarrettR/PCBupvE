@@ -19,7 +19,6 @@ def upvPaths(upv_paths):
 
     for path in upv_paths:
         count += 1
-        print("apth ", count)
         
         if path['layer'] == 'mechanical details':
             used_count += 1
@@ -29,7 +28,6 @@ def upvPaths(upv_paths):
             #if svg == '':
             svg += createSVG(translated_path, path['shape_types'])
 
-    print(svg)
     print(used_count, "paths processed of", count)
     return(svg, bounds)
     
@@ -63,7 +61,6 @@ def createSVG(path, shape_types):
     arc_run = False
     i = 0
     for point in path:
-        print('-> ', nmToMm(point['x']), ' ', nmToMm(point['y']), shape_types[i])
         if i == 0:
             initial = str(nmToMm(point['x'])) + ',' + str(-1 * nmToMm(point['y']))
             value += 'M ' + initial
@@ -76,7 +73,6 @@ def createSVG(path, shape_types):
             value += ' L ' + str(nmToMm(point['x'])) + ',' + str(-1 * nmToMm(point['y']))
             start = point
             point = next(path)
-            print('-> ', nmToMm(point['x']), ' ', nmToMm(point['y'])) #, ' ', shape_types[i])
             end = point
             arc_run = True
         else:
@@ -96,21 +92,11 @@ def createArc(start, end, nadir):
     c = nmToMm(distance(end, start))
     r = c / 2
     
-    #angle = sidesToAngle(a, b, c)
     angle = np.arctan((start['y'] - end['y']) / (start['x'] - end['x']))
     
     centre = {'x': (r * np.cos(angle)), 'y': (r * np.sin(angle))}
     centre['x'] = nmToMm(start['x']) - centre['x']
     centre['y'] = nmToMm(start['y']) - centre['y']
-    
-    print('start: ', nmToMm(start['x']), nmToMm(start['y']))
-    print('end: ', nmToMm(end['x']), nmToMm(end['y']))
-    print('nadir: ', nmToMm(nadir['x']), nmToMm(nadir['y']))
-    print('angle: ', angle)
-    print('a: ', a)
-    print('b: ', b)
-    print('c: ', c)
-    print('centre: ', centre['x'], centre['y'])
     
     if angle > (math.pi / 2):
         large_arc = 1
@@ -138,17 +124,5 @@ def distance(a, b):
 
     return d
     
-def sidesToAngle(a, b, c):
-    '''Cosine law: Given sides a, b, and c, this will return angle C'''
-
-    #return 5
-    if a + b <= c:
-        raise ValueError('Cosine Lawbreaker! a + b must be greater than c')
-    else:
-
-        C = np.arccos((a * a + b * b - c * c)/(2.0 * a * b))
-
-        return C
-
 def nmToMm(nm):
     return (int(nm) / 1000000)
