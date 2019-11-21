@@ -19,7 +19,7 @@ def upvTraceSegments(upv_trace_segments, bounds):
             raise ValueError('I haven\'t seen this trace type before! Please report an issue!')
         if len(trace_segment['control_points']) > 0:
             raise ValueError('I haven\'t seen trace_segment control points used before! Please report an issue!')
-        if len(trace_segment) != 6:
+        if len(trace_segment) != 6 and len(trace_segment) != 7:
             raise ValueError('Wrong number of trace_segment children! Please report an issue!')
             
         bounding_box_x = bounds['max_x'] - bounds['min_x']
